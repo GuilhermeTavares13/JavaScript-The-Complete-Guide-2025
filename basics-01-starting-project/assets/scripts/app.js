@@ -6,43 +6,56 @@ function getUserInput() {
    return Number(userInput.value);
 }
 
+function writeToLog(operation, prevResult, number, result) {
 
-function writeDescription(symbol,num1,num2) {
-   const description = `${num1} ${symbol} ${num2}`; 
+   const logEntry = {
+      operation: operation,
+      prevResult: prevResult,
+      number: number,
+      result: result
+   };
 
-   switch (symbol) {
-      case '+':
-         currentResult += getUserInput();
-         break;
-      case '-':
-         currentResult -= getUserInput();
-         break;
-      case '*':
-         currentResult *= getUserInput();
-         break;
-      case '/':
-         currentResult /= getUserInput();
-         break;
-   }
-   outputResult(currentResult, description);
-   logEntries.push(num2);
+   logEntries.push(logEntry); 
    console.log(logEntries);
 }
 
+function writeDescription(symbol,num) {
+   const description = `${currentResult} ${symbol} ${num}`; 
+   let prevResult = currentResult;
+
+   switch (symbol) {
+      case '+':
+         currentResult += num;
+         break;
+      case '-':
+         currentResult -= num;
+         break;
+      case '*':
+         currentResult *= num;
+         break;
+      case '/':
+         currentResult /= num;
+         break;
+   }
+
+   outputResult(currentResult, description);
+   writeToLog(symbol, prevResult, num, currentResult);
+}
+
 function add() {
-   writeDescription('+',currentResult,getUserInput());
+   writeDescription('+',getUserInput());
 }
 
 function subtract() {
-   writeDescription('-',currentResult,getUserInput());
+   writeDescription('-',getUserInput());
 }
 
 function multiply() {
-   writeDescription('*',currentResult,getUserInput());
+   writeDescription('*',getUserInput());
 }
 
 function divide() {
-   writeDescription('/',currentResult,getUserInput());
+   writeDescription('/',getUserInput());
 }
 
 addBtn.addEventListener('click', add);
