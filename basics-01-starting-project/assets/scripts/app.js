@@ -23,9 +23,21 @@ function writeDescription(symbol,num) {
    const description = `${currentResult} ${symbol} ${num}`; 
    let prevResult = currentResult;
 
+   if (
+      symbol !== '+' &&
+      symbol !== '-' &&
+      symbol !== '*' &&
+      symbol !== '/' ||
+      !num
+   ) {
+ 
+      return;
+   }
+
    switch (symbol) {
       case '+':
          currentResult += num;
+         console.log('teste');
          break;
       case '-':
          currentResult -= num;
