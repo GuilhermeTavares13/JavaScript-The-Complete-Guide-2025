@@ -24,7 +24,6 @@ const getPlayerChoice = () => {
 
 };
 
-
 const getComputerChoice = () => {
     const randomValue = Math.random();
     if(randomValue < 0.34) {
@@ -79,7 +78,34 @@ startGameBtn.addEventListener('click', function() {
     gameIsRunning = false;
 });
 
+const sumUp = (resultHandler,...numbers) => {
+    const validateNumber = (number) => {
+        return isNaN(number) ? 0 : number;
+    }
+
+    let sum = 0;
+    for(const num of numbers) {
+        sum += validateNumber(num);
+    }
+
+    resultHandler(sum);
+}
 
 
+const showResult = (sum) => {
+    alert(`The sum is ${sum}`);
+};
 
+
+sumUp(showResult,1,1,2,3,5,'8f');
+
+const subtractUp = function() {
+    let sum = 0;
+    for (const num in arguments) {
+        sum -= num;
+    }
+    console.log(sum);
+};
+
+// subtractUp(8,4,9,7);
 
