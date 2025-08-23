@@ -78,34 +78,28 @@ startGameBtn.addEventListener('click', function() {
     gameIsRunning = false;
 });
 
-const sumUp = (resultHandler,...numbers) => {
+const combine = (resultHandler,operation,...numbers) => {
     const validateNumber = (number) => {
         return isNaN(number) ? 0 : number;
     }
 
     let sum = 0;
     for(const num of numbers) {
-        sum += validateNumber(num);
+        if (operation === 'ADD') {
+            sum += validateNumber(num);
+        }
+        else {
+            sum -= validateNumber(num);
+        }
     }
 
     resultHandler(sum);
 }
 
-
-const showResult = (sum) => {
-    alert(`The sum is ${sum}`);
+const showResult = (message,sum) => {
+    alert(`${message} ${sum}`);
 };
 
-
-sumUp(showResult,1,1,2,3,5,'8f');
-
-const subtractUp = function() {
-    let sum = 0;
-    for (const num in arguments) {
-        sum -= num;
-    }
-    console.log(sum);
-};
-
-// subtractUp(8,4,9,7);
+combine(showResult.bind(this,'The result after adding all numbers is:'),'ADD',1,2,3,5);
+combine(showResult.bind(this,'The result after subtracting all numbers is:'),'MINUS',8,4,9,7);
 
